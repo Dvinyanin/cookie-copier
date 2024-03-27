@@ -143,6 +143,11 @@
             }
         });
     }
+    chrome.cookies.onChanged.addListener(({ cookie }) =>
+        state.pairs
+            .filter(({ from }) => from.includes(cookie.domain))
+            .forEach(detail => cloneCookieForPair({ detail })),
+    );
 </script>
 
 <div class="app">
